@@ -1,20 +1,23 @@
 #include "../data_structures/heap/heap.h"
 #include "event_handler.h"
 #include <sys/time.h>
-/* NOTE it'd be cool to have the functions be their own struct and let the impl decide things like _handler_heap */
-  /* pure handler functions will come once we're doing actual I/O to the user 
-     for now, we're only interested in timers */
 typedef struct _reactor reactor;
 struct _reactor {
   heap *_handler_heap;
+  /* call to start event loop */
   void (*start)(reactor *self);
-  void (*stop)(reactor *self);
+  /* schedule in event to tell event loop to go awai */
+  void (*stop)(reactor *self, time_t interval);
   /* useful for providing a generic interface around the handler_heap and directly adding events */
   void (*add_event)(reactor *self, event_handler *handler); 
   void (*start_timer)(reactor *self, event_handler *handler, time_t delta);
   void (*stop_timer)(reactor *self, event_handler *handler);
   // int (*stop_timer_by_id)(reactor *self, long timer_id);
   int (*handle_events)(reactor *self);
+  /* this should really be thought of as a callback.  the calling code can build a reactor and stick it to a custom 'IO' callback function */
+  int (*handle_IO)(reactor *self);
+  /* indicates when the reactor should start tearing down */
+  int teardown:1;
 };
 
 /* NOTES
