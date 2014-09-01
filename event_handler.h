@@ -1,3 +1,5 @@
+#ifndef LIBREACTOR_EVENTHANDLER
+#define LIBREACTOR_EVENTHANDLER
 #include <time.h>
 /* TODO: we've hit the point where these should be masks */
 #define REACTOR_EVENT_CANCELLED -1
@@ -20,3 +22,4 @@ struct _event_handler {
 };
 
 void event_handler_free (event_handler *handler);
+#endif

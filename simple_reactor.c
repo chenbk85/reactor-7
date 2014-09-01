@@ -1,4 +1,4 @@
-#include "simple_reactor.h"
+#include <simple_reactor.h>
 #include <unistd.h>
 
 static void simple_reactor_start(reactor *self)
@@ -94,7 +94,7 @@ int simple_reactor_handle_events(reactor *self)
     The caller is expected to allocate *self before passing it in
 */
 #define ASSIGN_IMPL_FUNC(__x) self->__x = simple_reactor_##__x
-void simple_reactor_new(reactor *self, int (*io_callback)(reactor *self) )
+void simple_reactor_new(reactor *self, int (*io_callback)(reactor *self))
 {
   ASSIGN_IMPL_FUNC (start); // start the loop
   ASSIGN_IMPL_FUNC (stop); // stop the loop

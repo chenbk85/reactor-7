@@ -1,4 +1,10 @@
-#include "../data_structures/heap/heap.h"
+#ifndef LIBREACTOR_REACTOR
+#define LIBREACTOR_REACTOR
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <heap/heap.h>
 #include "event_handler.h"
 #include <sys/time.h>
 typedef struct _reactor reactor;
@@ -29,3 +35,7 @@ with IDs, the reactor could actually stick to having a simple array as opposed t
 the only real difference is wheter you pass around a number or a pointer.  passing around a number is theoretically safer
 i like passing the pointer b/c it avoids duplicating data, thing is that you'll need to put in ref counting for safety
 */
+#ifdef __cplusplus
+}
+#endif
+#endif

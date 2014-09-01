@@ -2,7 +2,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include <stdlib.h>
-#include "../simple_reactor.h"
+#include <simple_reactor.h>
 
 typedef struct test_cb_arg {
   char *msg;
