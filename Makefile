@@ -19,10 +19,10 @@ tests/timer_test: libreactor.so
 
 install: libreactor.so
 	cp libreactor.so /usr/local/lib/libreactor.so
-	cp event_handler.h reactor.h reactor_event.h simple_reactor.h /usr/include
+	cp event_handler.h reactor.h reactor_event.h simple_reactor.h /usr/local/include
 
 uninstall:
-	rm -f /usr/local/lib/libreactor.so /usr/local/lib/event_handler.h /usr/local/lib/reactor.h /usr/local/lib/reactor_event.h /usr/local/lib/simple_reactor.h
+	rm -f /usr/local/lib/libreactor.so /usr/local/include/event_handler.h /usr/local/include/reactor.h /usr/local/include/reactor_event.h /usr/local/include/simple_reactor.h
 .PHONY: clean
 
 clean : 
