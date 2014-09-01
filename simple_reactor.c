@@ -94,7 +94,7 @@ int simple_reactor_handle_events(reactor *self)
     The caller is expected to allocate *self before passing it in
 */
 #define ASSIGN_IMPL_FUNC(__x) self->__x = simple_reactor_##__x
-void simple_reactor_new(reactor *self)
+void simple_reactor_new(reactor *self, void (*io_callback)(reactor *self) )
 {
   ASSIGN_IMPL_FUNC (start); // start the loop
   ASSIGN_IMPL_FUNC (stop); // stop the loop
@@ -102,5 +102,6 @@ void simple_reactor_new(reactor *self)
   ASSIGN_IMPL_FUNC (stop_timer);
   //ASSIGN_IMPL_FUNC (stop_timer_by_id); //make this NULL
   ASSIGN_IMPL_FUNC (handle_events); //make this happen as event loop
+  self->handle_IO = io_callback;
   self->_handler_heap = (heap *)heap_new(100);
 }

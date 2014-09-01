@@ -46,7 +46,7 @@ int main (void)
   reactor_t = malloc (sizeof *reactor_t);
   time_t now = time(NULL);
 
-  simple_reactor_new(reactor_t);
+  simple_reactor_new(reactor_t, NULL);
   test_cb_arg *eh_cb_arg2 = malloc (sizeof *eh_cb_arg2);
   eh_cb_arg2->msg = "i should never fire!";
   eh_cb_arg2->eh_to_kill = NULL;
