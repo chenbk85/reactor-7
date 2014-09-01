@@ -1,7 +1,5 @@
 #include "simple_reactor.h"
 
-// TODO: I don't get what these start/stop functions should do... look into that
-/* these are constructor/destructor functions, i'll do them later */
 static void simple_reactor_start(reactor *self)
 {
     int retval;
