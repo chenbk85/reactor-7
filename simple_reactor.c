@@ -1,13 +1,13 @@
 #include "simple_reactor.h"
+#include <unistd.h>
 
 static void simple_reactor_start(reactor *self)
 {
-    int retval;
     while(self->teardown == 0) {
       if (self->handle_IO) {
         self->handle_IO(self);
       }
-      retval = self->handle_events(self);
+      self->handle_events(self);
       usleep(500000);
     }
     /* runs when reactor stops */
@@ -94,7 +94,7 @@ int simple_reactor_handle_events(reactor *self)
     The caller is expected to allocate *self before passing it in
 */
 #define ASSIGN_IMPL_FUNC(__x) self->__x = simple_reactor_##__x
-void simple_reactor_new(reactor *self, void (*io_callback)(reactor *self) )
+void simple_reactor_new(reactor *self, int (*io_callback)(reactor *self) )
 {
   ASSIGN_IMPL_FUNC (start); // start the loop
   ASSIGN_IMPL_FUNC (stop); // stop the loop
