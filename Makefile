@@ -1,7 +1,6 @@
-FLAGS = -g3 -Wall -I.
-OBJFLAGS = -c -fPIC
+FLAGS = -g3 -Wall 
+OBJFLAGS = -fPIC -c
 SOFLAGS = -fPIC -shared
-
 all : libreactor.so tests/timer_test
 
 event_handler.o : event_handler.c event_handler.h reactor.h
@@ -14,8 +13,7 @@ libreactor.so: simple_reactor.o event_handler.o simple_reactor.h
 	gcc $(FLAGS) $(SOFLAGS) simple_reactor.o event_handler.o -o libreactor.so
 
 tests/timer_test: libreactor.so
-	#gcc $(FLAGS) ../data_structures/heap/heap.o ./event_handler.o tests/timer_test.c simple_reactor.o -o ./tests/timer_test && ./tests/timer_test
-	gcc $(FLAGS) -ldstructs -lreactor tests/timer_test.c -o ./tests/timer_test
+	gcc $(FLAGS) ./tests/timer_test.c -o ./tests/timer_test -lreactor -ldstructs
 
 install: libreactor.so
 	cp libreactor.so /usr/local/lib/libreactor.so
